@@ -13,3 +13,6 @@ header, footer{
 main{
     height: 90vh;
 }
+.form_parking{
+    max-width: 30%;
+}

@@ -1,7 +1,18 @@
 <?php
-    include __DIR__. "/partials//hotels.php"
+    include __DIR__. "/partials//hotels.php";
 
-    
+    if(isset($_GET['parking'])){
+        $parking = [];
+
+        foreach($hotels as $hotel_parking){
+        if($hotel_parking['parking'] == filter_var($_GET['parking'], FILTER_VALIDATE_BOOLEAN)){
+            $parking [] = $hotel_parking;
+        }else if($_GET['parking'] == 'null'){
+            $parking [] = $hotel_parking;
+        }
+    };
+    $hotels = $parking;
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +32,21 @@
 
     <main>
         <div class="container pt-5">
+
+        <form class="mb-5 " action="index.php" method="GET">
+        <div class="form-group">
+            <label class="controll-label m-2">Filtra per parcheggio</label>
+            <select name="parking" class="form-control form_parking" require>
+                <option value='null' selected >Tutti</option>
+                <option value="1">Ha parcheggio</option>
+                <option value="0">Non ha parcheggio</option>
+            </select>
+        </div>
+        <div class="form-group m-2">
+            <button type=submit class="btn btn-danger">Filtra</button>          
+        </div>
+    </form>
+
             <table class="table table-striped">      
                 <thead>
                     <tr>
