@@ -7,12 +7,27 @@
         foreach($hotels as $hotel_parking){
         if($hotel_parking['parking'] == filter_var($_GET['parking'], FILTER_VALIDATE_BOOLEAN)){
             $parking [] = $hotel_parking;
-        }else if($_GET['parking'] == 'null'){
+        }else if($_GET['parking'] == 'all'){
             $parking [] = $hotel_parking;
         }
+
     };
     $hotels = $parking;
-}
+};
+    if(isset($_GET['value'])){
+        $value_hotel = [];
+
+        foreach($hotels as $hotel_value){
+        if($_GET['value'] <= $hotel_value['vote']){
+            $value_hotel [] = $hotel_value;
+        }else if($_GET['value'] == 'all'){
+            $value_hotel [] = $hotel_value;
+        }
+    };
+    $hotels = $value_hotel;
+    };
+
+    $message = count($hotels) ;
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +52,20 @@
         <div class="form-group">
             <label class="controll-label m-2">Filtra per parcheggio</label>
             <select name="parking" class="form-control form_parking" require>
-                <option value='null' selected >Tutti</option>
+                <option value='all' selected >Tutti</option>
                 <option value="1">Ha parcheggio</option>
                 <option value="0">Non ha parcheggio</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="controll-label m-2">Filtra per voto</label>
+            <select name="value" class="form-control form_parking" require>
+                <option value='all' selected >Tutti</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
         </div>
         <div class="form-group m-2">
@@ -64,13 +90,14 @@
                     <th scope="row"><?php echo $index +1 ?></th>
                     <td><?php echo $hotel['name'] ?></td>
                     <td class="d-none d-md-block"><?php echo $hotel['description'] ?></td>
-                    <td><?php echo ($hotel['parking'] == true) ? 'Posiede parcheggio' : 'Non ha parcheggio' ?></td>
+                    <td><?php echo ($hotel['parking'] == true) ? 'Possiede parcheggio' : 'Non ha parcheggio' ?></td>
                     <td><?php echo $hotel['vote'] ?></td>
                     <td class="d-none d-sm-block"><<?php echo $hotel['distance_to_center'] ?></td>
                     </tr>
                 </tbody>
                 <?php } ?>
             </table>
+            <h3 class="text-center mt-5">Risultati trovati : <?php echo $message ?></h3>
         </div>
     </main>
 
