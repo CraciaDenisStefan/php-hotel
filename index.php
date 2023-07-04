@@ -45,28 +45,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <title>Hotels</title>
 </head>
 <body>
-<ul>
-        <?php foreach($hotels as $hotel){ ?>
-        <li>
-            <?php echo $hotel['name'] ?> 
-        </li>
-        <li>
-        <?php echo $hotel['description'] ?>
-        </li>
-        <li>
-        <?php echo ($hotel['parking'] == true) ? 'Posiede parcheggio' : 'Non ha parcheggio' ?>
-        </li>
-        <li>
-        <?php echo $hotel['vote'] ?>
-        </li>
-        <li>
-        <?php echo $hotel['distance_to_center'] ?>
-        </li>
-        <hr>
+    <div class="container">
+            <table class="table table-striped">
+            
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome Hotel</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col"> Parcheggio</th>
+            <th scope="col">Voto</th>
+            <th scope="col">Distanza</th>
+            </tr>
+        </thead>
+        <?php foreach($hotels as $index => $hotel){ ?>
+        <tbody>
+            <tr>
+            <th scope="row"><?php echo $index +1 ?></th>
+            <td><?php echo $hotel['name'] ?></td>
+            <td><?php echo $hotel['description'] ?></td>
+            <td><?php echo ($hotel['parking'] == true) ? 'Posiede parcheggio' : 'Non ha parcheggio' ?></td>
+            <td><?php echo $hotel['vote'] ?></td>
+            <td><<?php echo $hotel['distance_to_center'] ?></td>
+            </tr>
+        </tbody>
         <?php } ?>
-    </ul>
+        </table>
+    </div>
 </body>
 </html>
