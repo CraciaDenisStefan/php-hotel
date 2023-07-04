@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header, footer{
+    background-color: blanchedalmond;
+    height: 5rem;
+}
+.welcome{
+    color: rgb(116, 57, 57);
+}
+main{
+    height: 90vh;
+}
